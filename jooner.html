@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #aura-display {
+            font-size: 48px;
+            color: #FFFFFF; /* Change to fit your theme */
+        }
+    </style>
+</head>
+<body>
+    <div id="aura-display">Loading...</div>
+    <script>
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxJJa-6LdJSwFBM-92_3ZXjarfV-tUvO1FaoT57do2UUik1HilSDoF1BAUmAUgXiVziCA/exec'; // Replace with your script's URL
+
+        async function fetchAura() {
+            try {
+                const response = await fetch(API_URL);
+                const auraText = await response.text(); // Fetch as plain text
+                document.getElementById('aura-display').textContent = auraText;
+            } catch (error) {
+                console.error('Error fetching aura value:', error);
+                document.getElementById('aura-display').textContent = 'Error loading aura';
+            }
+        }
+
+        // Update the aura value every 5 seconds
+        fetchAura();
+        setInterval(fetchAura, 5000);
+    </script>
+</body>
+</html>
